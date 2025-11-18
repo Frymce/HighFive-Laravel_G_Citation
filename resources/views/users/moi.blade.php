@@ -48,12 +48,7 @@
                     <p class="text-gray-500 text-sm">Email</p>
                     <p class="font-medium text-gray-800">{{ auth()->user()->email }}</p>
                 </div>
-
-                <div>
-                    <p class="text-gray-500 text-sm">ID Utilisateur</p>
-                    <p class="font-medium text-gray-800">#{{ auth()->user()->id }}</p>
-                </div>
-
+                
                 <div>
                     <p class="text-gray-500 text-sm">Dernière mise à jour</p>
                     <p class="font-medium text-gray-800">

@@ -74,7 +74,23 @@ class CitationController extends Controller implements HasMiddleware
         return redirect('/citation')->with(['success_message' => 'La citation a été supprimée avec succès !']);
     }
 
-    public function like(Request $request, Citation $citation){
-        $user = Auth::user();
+    public function like($id){
+        $citation = Citation::findOrFail($id);
+        // $user = auth()->user();
+          $user = Auth::user();
+
+        //Vérification si c'est déjà liké
+        if ($citation->isLikedBy($user)) {
+            //Suppression du like
+            $citation->likes()->where('user_id', $user->id)->delete();
+            return back()->with(['success_message' => 'Le like a été supprimé avec succès !']);
+        }
+        //Création du like
+        $citation->likes()->create([
+            'user_id' => $user->id,
+            'citation_id' => $citation->id,
+        ]);
+        return back()->with(['success_message' => 'Citation likée !']);
+
     }
 }

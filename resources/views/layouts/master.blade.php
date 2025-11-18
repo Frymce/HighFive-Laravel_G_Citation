@@ -45,6 +45,7 @@
 
                 @auth
                     <a href="/citation" class="hover:text-green-600 transition">Citations</a>
+                    <a href="/blagues" class="hover:text-green-600 transition">Blagues</a>
                     {{-- @if (auth()->user()->role == 'admin')
                         <a href="/g-citation" class="hover:text-green-600 transition">Gestion</a>
                     @endif --}}
@@ -56,13 +57,24 @@
                 @endguest
 
                 @auth
-                    @if (auth()->user()->role == 'admin')
+                    {{-- @if (auth()->user()->role == 'admin')
                     <a href="{{ route('users') }}" class="hover:text-green-600 transition">DashAdmin</a>
-                    @endif
+                    @endif --}}
+                    @can('see-admin-menu')
+                        <a href="{{ route('users') }}" class="hover:text-green-600 transition">DashAdmin</a>
+                    @endcan
 
-                    @if (auth()->user()->role == 'user'|| auth()->user()->role == 'admin')
+
+                    {{-- @if (auth()->user()->role == 'user' || auth()->user()->role == 'admin')
                         <a href="/citation/create" class="hover:text-green-600 transition">Ajouter</a>
-                    @endif
+                    @endif --}}
+                    @can('see-create-citation')
+                        <a href="/citation/create" class="hover:text-green-600 transition">Ajouter</a>
+                    @endcan
+
+
+                        <a href="/blagues/create" class="hover:text-green-600 transition">➕Blagues</a>
+                    
 
                     <a href="{{ route('profile') }}" class="hover:text-green-600 transition">
                         <div

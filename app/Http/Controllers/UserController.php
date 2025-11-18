@@ -20,7 +20,8 @@ class UserController extends Controller
     public function edit(Request $request, User $user)
     {
         $user->update($request->all());
-        return 
+        // dd('');
+        return redirect('/users')->with(['success_message' => 'L\'utilisateur a été modifié avec succès !']);
 
     }
 }

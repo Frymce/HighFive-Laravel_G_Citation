@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CitationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\SessionsController;
-
+use App\Http\Controllers\BlaguesController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class, 'accueil']);
@@ -43,3 +43,16 @@ Route::patch('/users/{user}/edit', [UserController::class, 'edit'])->name('users
 
 Route::post('/citation/{id}/like', [CitationController::class, 'like'])->name('like')->middleware('auth');
 Route::post('/citation/{id}/unlike', [CitationController::class, 'unlike'])->name('unlike')->middleware('auth');
+
+Route::post('/citation/{id}/like', [CitationController::class, 'like'])->middleware('auth')->name('like');
+
+
+
+Route::get('/blagues', [BlaguesController::class, 'index']);
+
+Route::get('/blagues/create', [BlaguesController::class, 'create'])->name('blague')->middleware('auth');
+Route::post('/blagues/create', [BlaguesController::class, 'store'])->name('blague')->middleware('auth');
+
+Route::get('/blague/{blague}/edit', [BlaguesController::class, 'edit'])->middleware('auth');
+Route::patch('/blague/{blague}/edit', [BlaguesController::class, 'update'])->middleware('auth');
+Route::delete('/blague/{blague}/delete', [BlaguesController::class, 'delete'])->middleware('auth');

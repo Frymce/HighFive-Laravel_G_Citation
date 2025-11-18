@@ -62,8 +62,21 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+    //un utilisateur peut avoir des blagues
+    public function blague(){
+        return $this->belongsToMany(Blague::class);
+    }
+
 
     public function isAdmin(){
         return $this->admin;
+    }
+
+    public function isLecteur(){
+        return $this->lecteur;
+    }
+
+    public function isAuthor(){
+        return $this->user;
     }
 }
